@@ -1,0 +1,16 @@
+[package]
+name = "core_decomposition"
+version = "0.1.0"
+authors = ["zhengmin <zhengmin.lai@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+timely = "0.8.0"
+itertools = "0.7.11"
+clap = "2.32.0"
+
+[dependencies.rust_graph]
+git = "ssh://git@github.com/UNSW-database/rust_graph_lib.git"
+branch="fix_2018"
