@@ -114,8 +114,10 @@ fn main() {
 
                             for buffer in todo.drain(..) {
                                 for node in buffer {
+
                                     let mut arc_cnt_mut = arc_cnt.lock().unwrap();
                                     let mut arc_core_mut = arc_core.lock().unwrap();
+
                                     if arc_cnt_mut[node as usize] < arc_core_mut[node as usize] {
                                         let v = cmp_node_count_clone.fetch_add(1, Ordering::SeqCst);
                                         if v >= batch_output_size - 1 {
@@ -130,8 +132,8 @@ fn main() {
                                         update_cnt(nbrs, c_old, &arc_core_mut, arc_core_mut[node as usize], &mut arc_cnt_mut);
                                         //println!("Worker {} After update cnt: {:?}, core: {:?}", index, arc_cnt_mut, arc_core_mut);
                                     }
-                                    for nbr in g.neighbors_iter(node as u32){
-                                        if arc_cnt_mut[nbr as usize] < arc_core_mut[nbr as usize]{
+                                    for nbr in g.neighbors_iter(node as u32) {
+                                        if arc_cnt_mut[nbr as usize] < arc_core_mut[nbr as usize] {
                                             session.give(nbr as u64);
                                         }
                                     }
